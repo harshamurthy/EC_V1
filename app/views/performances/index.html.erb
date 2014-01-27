@@ -1,0 +1,31 @@
+<h1>Listing performances</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Exercise</th>
+      <th>Name</th>
+      <th>Value</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @performances.each do |performance| %>
+      <tr>
+        <td><%= performance.exercise.name %></td>
+        <td><%= performance.name %></td>
+        <td><%= performance.value %></td>
+        <td><%= link_to 'Show', performance %></td>
+        <td><%= link_to 'Edit', edit_performance_path(performance) %></td>
+        <td><%= link_to 'Destroy', performance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Performance', new_performance_path %>
