@@ -1,14 +1,15 @@
 <p id="notice"><%= notice %></p>
-
+<h1>Routine number <%= @routine.id %></h1>
 <p>
-  <strong>Client:</strong>
-  <%= @routine.client_id %>
-</p>
-
-<p>
-  <strong>Description:</strong>
+  <strong>Name:</strong>
   <%= @routine.description %>
 </p>
+
+<ul>
+  <% @routine.rtes.each do |rte| %>
+    <li><%= rte.exercise.name %></li>
+  <% end %>
+</ul>
 
 <%= link_to 'Edit', edit_routine_path(@routine) %> |
 <%= link_to 'Back', routines_path %>

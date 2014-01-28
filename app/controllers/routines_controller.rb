@@ -15,6 +15,7 @@ class RoutinesController < ApplicationController
   # GET /routines/new
   def new
     @routine = Routine.new
+    @exercises = Exercise.all
   end
 
   # GET /routines/1/edit
@@ -24,7 +25,15 @@ class RoutinesController < ApplicationController
   # POST /routines
   # POST /routines.json
   def create
-    @routine = Routine.new(routine_params)
+    @routine = Routine.new
+    @routine.description = params[:routine][:description]
+    @routine.save
+
+    params.each do |param|
+      if param[0].include?("exercise_")
+        Rte.create(routine_id: @routine.id, exercise_id: param[1])
+      end
+    end
 
     respond_to do |format|
       if @routine.save
@@ -69,6 +78,6 @@ class RoutinesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def routine_params
-      params.require(:routine).permit(:client_id, :description)
+      params.require(:routine).permit(:client_id, :description, :exercise_id)
     end
 end
