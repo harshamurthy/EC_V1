@@ -15,6 +15,8 @@ class SessionsController < ApplicationController
   # GET /sessions/new
   def new
     @session = Session.new
+    @clients = Client.all
+    @routines = Routine.all
   end
 
   # GET /sessions/1/edit

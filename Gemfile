@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
+#jQueryUI
+gem 'jquery-ui-rails'
 #Devise
 gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

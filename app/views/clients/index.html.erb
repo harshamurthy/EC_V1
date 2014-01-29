@@ -1,5 +1,16 @@
+<style type="text/css">
+  input {
+    margin-bottom: 100px;
+  }
+</style>
+
 <h1>Listing clients</h1>
-<input placeholder="search for your client...">
+
+<%= form_tag clients_url, method: 'get' do %>
+  <%= text_field_tag :search, nil, placeholder: "Search for your clients..." %>
+  <%= submit_tag :search %>
+<% end %>
+
 <table>
   <thead>
     <tr>
@@ -31,5 +42,13 @@
 </table>
 
 <br>
-
 <%= link_to 'New Client', new_client_path %>
+
+<script type="text/javascript">
+$(function() {
+    var availableTags =  <%= @clients.collect{ |c| c.name }.to_json.html_safe %>;
+    $( "#search" ).autocomplete({
+      source: availableTags
+    });
+  });
+</script>

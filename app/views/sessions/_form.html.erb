@@ -21,11 +21,11 @@
   </div>
   <div class="field">
     <%= f.label :client_id %><br>
-    <%= f.number_field :client_id %>
+    <%= f.select :client_id, options_for_select(@clients.collect{ |u| [u.name, u.id] }) %>
   </div>
   <div class="field">
     <%= f.label :routine_id %><br>
-    <%= f.number_field :routine_id %>
+    <%= f.select :routine_id, options_for_select(@routines.collect{ |u| [u.description, u.id] }) %>
   </div>
   <div class="actions">
     <%= f.submit %>
