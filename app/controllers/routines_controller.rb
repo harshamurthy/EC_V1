@@ -1,5 +1,6 @@
 class RoutinesController < ApplicationController
   before_action :set_routine, only: [:show, :edit, :update, :destroy]
+  before_action :set_exercises, only: [:show, :edit, :update, :destroy, :new]
 
   # GET /routines
   # GET /routines.json
@@ -15,7 +16,6 @@ class RoutinesController < ApplicationController
   # GET /routines/new
   def new
     @routine = Routine.new
-    @exercises = Exercise.all
   end
 
   # GET /routines/1/edit
@@ -25,15 +25,7 @@ class RoutinesController < ApplicationController
   # POST /routines
   # POST /routines.json
   def create
-    @routine = Routine.new
-    @routine.description = params[:routine][:description]
-    @routine.save
-
-    params.each do |param|
-      if param[0].include?("exercise_")
-        Rte.create(routine_id: @routine.id, exercise_id: param[1])
-      end
-    end
+    @routine = Routine.new(routine_params)
 
     respond_to do |format|
       if @routine.save
@@ -50,7 +42,7 @@ class RoutinesController < ApplicationController
   # PATCH/PUT /routines/1.json
   def update
     respond_to do |format|
-      if @routine.update(routine_params)
+      if @routine.update_attributes(routine_params)
         format.html { redirect_to @routine, notice: 'Routine was successfully updated.' }
         format.json { head :no_content }
       else
@@ -76,8 +68,12 @@ class RoutinesController < ApplicationController
       @routine = Routine.find(params[:id])
     end
 
+    def set_exercises
+      @exercises = Exercise.all
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def routine_params
-      params.require(:routine).permit(:client_id, :description, :exercise_id)
+      params.require(:routine).permit(:client_id, :description, :exercise_ids => [])
     end
 end

@@ -18,8 +18,8 @@
   <ul>
     <% @exercises.each do |exercise| %>
       <li>
-        <%= check_box_tag "exercise_#{exercise.id}", "#{exercise.id}" %>
-        <%= label_tag "#{exercise.name}" %>
+        <%= check_box_tag "routine[exercise_ids][]" , exercise.id, @routine.exercise_ids.include?(exercise.id) %>
+        <%= label_tag exercise.name %>
       </li>
     <% end %>
   </ul>

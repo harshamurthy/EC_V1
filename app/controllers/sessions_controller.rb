@@ -17,6 +17,7 @@ class SessionsController < ApplicationController
     @session = Session.new
     @clients = Client.all
     @routines = Routine.all
+    @exercises = Exercise.all
   end
 
   # GET /sessions/1/edit
@@ -26,7 +27,15 @@ class SessionsController < ApplicationController
   # POST /sessions
   # POST /sessions.json
   def create
+
+
     @session = Session.new(session_params)
+
+    if @session.routine.nil?
+      @session.routine = Routine.find_or_initialize_by_exercise_ids(routine_params[:exercise_ids])
+      @session.routine.description = routine_params[:description]
+      @session.routine.save!
+    end
 
     respond_to do |format|
       if @session.save
@@ -72,5 +81,9 @@ class SessionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def session_params
       params.require(:session).permit(:name, :date, :client_id, :routine_id)
+    end
+
+    def routine_params
+      params.require(:session).require(:routine).permit!
     end
 end
