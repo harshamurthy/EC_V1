@@ -1,0 +1,11 @@
+// Place all Dry styles here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$head-text-size: 30px;
+$text-input-size: 24px;
+
+%header-text-style {
+  font-size: $head-text-size;
+  font-weight: bold;
+}

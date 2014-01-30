@@ -1,0 +1,61 @@
+// Place all the styles related to the Devise controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'dry';
+
+.sign-in-page {
+  height: 100%;
+
+  .sign-in-form {
+    background-color: lightblue;
+    max-width: 50%;
+    margin: 0 auto;
+    font-family: 'Duru Sans';
+    margin-top: 15%;
+    text-align: center;
+
+    .sign-in-header {
+      @extend %header-text-style;
+    }
+
+    .sign-in-labels {
+      display: none;
+    }
+
+    .sign-in-inputs {
+      border-bottom: solid 1px black;
+      font-size: $text-input-size;
+      color: #f26d1c;
+      outline-width: 0;
+      width: 60%;
+      margin: 10px;
+    }
+
+    .sign-in-help {
+      font-size: 12px;
+      max-width: 60%;
+      // text-align: left;
+      margin-left: 20%;
+      margin-right: 20%;
+    }
+
+    .sign-in-button {
+      background-color: #f26d1c;
+      outline-width: 0;
+      width: 60%;
+      padding: 10px;
+      border-radius: 5px;
+      color: white;
+      margin-top: 5%;
+      margin-bottom: 1%;
+
+      &:hover {
+        background-color: #e1661b;
+      }
+
+      .sign-up-link {
+        font-size: 8px;
+      }
+    }
+  }
+}
