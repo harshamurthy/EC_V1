@@ -28,11 +28,13 @@
     <%= f.select :routine_id, options_for_select(@routines.collect{ |u| [u.description, u.id] }), include_blank: true %>
   </div>
     <p>or create a routine</p>
-  <div>
-    <%= f.fields_for Routine.new do |r|%>
+
+  <div class='field'>
+    <%= f.fields_for Routine.new do |r| %>
        <div class="field">
         <%= r.label :description %><br>
         <%= r.text_field :description %>
+      </div>
 
       <ul>
         <% @exercises.each do |exercise| %>
@@ -43,9 +45,9 @@
         <% end %>
       </ul>
 
-      </div>
-    <%end%>
+    <% end %>
   </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

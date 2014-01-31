@@ -19,13 +19,13 @@ class ExercisesController < ApplicationController
 
   # GET /exercises/1/edit
   def edit
+    @performances = Performance.where(exercise_id: params[:id])
   end
 
   # POST /exercises
   # POST /exercises.json
   def create
     @exercise = Exercise.new(exercise_params)
-
     respond_to do |format|
       if @exercise.save
         format.html { redirect_to @exercise, notice: 'Exercise was successfully created.' }
@@ -69,6 +69,6 @@ class ExercisesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def exercise_params
-      params.require(:exercise).permit(:name)
+      params.require(:exercise).permit(:name, performances_attributes: [:value, :id], settings_attributes: [:value, :id])
     end
 end

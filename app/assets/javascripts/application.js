@@ -14,5 +14,30 @@
 //= require jquery_ujs
 //= require jquery.ui.autocomplete
 //= require jquery.ui.datepicker
-//= require turbolinks
 //= require_tree .
+
+$(document).ready(function() {
+  $('.hide').hide()
+
+  var setupClientsList = function(){
+    var $el = $(".client-list");
+
+    centerSearchBar = function() {
+      mainHeight = $(window).height();
+    }
+
+    if ($el.length > 0) { centerSearchBar(); }
+  };
+
+  var setupWorkoutSession = function(){
+    $('.exercise-list .session-exercise-link').on("click", function() {
+      $(this).parent().siblings().removeClass("onclick");
+      $(".execution-data > div").hide();
+      $($(this).data("target")).show();
+      $(this).parent().addClass("onclick");
+    });
+  };
+
+  setupWorkoutSession();
+  setupClientsList();
+});

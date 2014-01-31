@@ -1,21 +1,17 @@
-<%= form_for(@exercise) do |f| %>
-  <% if @exercise.errors.any? %>
+<%= form_for(exercise) do |f| %>
+  <% if exercise.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@exercise.errors.count, "error") %> prohibited this exercise from being saved:</h2>
+      <h2><%= pluralize(exercise.errors.count, "error") %> prohibited this exercise from being saved:</h2>
 
       <ul>
-      <% @exercise.errors.full_messages.each do |msg| %>
+      <% exercise.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <% if f.object.id.present? %>
+  <% if exercise.persisted? %>
     <div class="field">
       <%= f.fields_for :performances do |builder| %>
         <%= builder.text_field :value %>
@@ -33,3 +29,4 @@
     <%= f.submit %>
   </div>
 <% end %>
+

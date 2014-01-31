@@ -7,7 +7,6 @@
   height: 100%;
 
   .sign-in-form {
-    background-color: lightblue;
     max-width: 50%;
     margin: 0 auto;
     font-family: 'Duru Sans';
@@ -29,12 +28,12 @@
       outline-width: 0;
       width: 60%;
       margin: 10px;
+      border-radius: 0;
     }
 
     .sign-in-help {
       font-size: 12px;
       max-width: 60%;
-      // text-align: left;
       margin-left: 20%;
       margin-right: 20%;
     }
@@ -48,10 +47,6 @@
       color: white;
       margin-top: 5%;
       margin-bottom: 1%;
-
-      &:hover {
-        background-color: #e1661b;
-      }
 
       .sign-up-link {
         font-size: 8px;

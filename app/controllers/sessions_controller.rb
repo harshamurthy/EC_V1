@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   before_action :set_session, only: [:show, :edit, :update, :destroy]
+  before_action :set_clients_routines_exercises, only: [:show, :edit, :update, :destroy, :new]
 
   # GET /sessions
   # GET /sessions.json
@@ -10,14 +11,14 @@ class SessionsController < ApplicationController
   # GET /sessions/1
   # GET /sessions/1.json
   def show
+    if params[:exercise_id].present?
+      @exercise = Exercise.find(params[:exercise_id])
+    end
   end
 
   # GET /sessions/new
   def new
     @session = Session.new
-    @clients = Client.all
-    @routines = Routine.all
-    @exercises = Exercise.all
   end
 
   # GET /sessions/1/edit
@@ -27,16 +28,12 @@ class SessionsController < ApplicationController
   # POST /sessions
   # POST /sessions.json
   def create
-
-
     @session = Session.new(session_params)
-
     if @session.routine.nil?
       @session.routine = Routine.find_or_initialize_by_exercise_ids(routine_params[:exercise_ids])
       @session.routine.description = routine_params[:description]
       @session.routine.save!
     end
-
     respond_to do |format|
       if @session.save
         format.html { redirect_to @session, notice: 'Session was successfully created.' }
@@ -76,6 +73,12 @@ class SessionsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_session
       @session = Session.find(params[:id])
+    end
+
+    def set_clients_routines_exercises
+      @clients = Client.all
+      @routines = Routine.all
+      @exercises = Exercise.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
